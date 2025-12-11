@@ -36,21 +36,19 @@ def get_redshift_connection():
     if not DB_HOST:
         return None
         
-try:
-    # psycopg2.connect yerine pg8000.dbapi.connect kullanılır, ancak 
-    # yukarıdaki import ile bu zaten sağlanır.
-    conn = psycopg2.connect( 
-        host=DB_HOST,
-        database=DB_NAME,
-        user=DB_USER,
-        password=DB_PASS,
-        port=int(DB_PORT)
-    )
-    return conn
-except Exception as e:
-    st.error(f"❌ Redshift Connection Error using pg8000: {e}")
-    return None
-
+    try: # <-- 4 boşluk girinti ile başlatın!
+        # psycopg2.connect yerine pg8000.dbapi.connect kullanılır
+        conn = psycopg2.connect( 
+            host=DB_HOST,
+            database=DB_NAME,
+            user=DB_USER,
+            password=DB_PASS,
+            port=int(DB_PORT)
+        )
+        return conn
+    except Exception as e: # <-- 4 boşluk girinti ile başlatın!
+        st.error(f"❌ Redshift Connection Error using pg8000: {e}")
+        return None
 # 2. Main Data Fetch Function
 # Caches the DataFrame data for 1800 seconds (30 minutes).
 @st.cache_data(ttl=1800)
@@ -200,5 +198,6 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
