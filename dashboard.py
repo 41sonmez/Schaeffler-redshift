@@ -36,17 +36,19 @@ def get_redshift_connection():
     if not DB_HOST:
         return None
         
-    try:
-        conn = psycopg2.connect(
+  try:
+        # psycopg2.connect yerine pg8000.dbapi.connect kullanılır, ancak 
+        # yukarıdaki import ile bu zaten sağlanır.
+        conn = psycopg2.connect( 
             host=DB_HOST,
-            dbname=DB_NAME,
+            database=DB_NAME,
             user=DB_USER,
             password=DB_PASS,
-            port=int(DB_PORT) # Ensure port number is an integer
+            port=int(DB_PORT)
         )
         return conn
     except Exception as e:
-        st.error(f"❌ Redshift Connection Error: {e}")
+        st.error(f"❌ Redshift Connection Error using pg8000: {e}")
         return None
 
 # 2. Main Data Fetch Function
@@ -198,3 +200,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
