@@ -44,9 +44,11 @@ def get_redshift_connection():
             user=DB_USER,
             password=DB_PASS,
             port=int(DB_PORT)
+            timeout=5 # Bağlantı kurmak için maksimum 5 saniye bekle
         )
         return conn
-    except Exception as e: # <-- 4 boşluk girinti ile başlatın!
+    except Exception as e:
+        # Eğer bağlantı 5 saniyede kurulamazsa, buraya düşer.
         st.error(f"❌ Redshift Connection Error using pg8000: {e}")
         return None
 # 2. Main Data Fetch Function
@@ -198,6 +200,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
