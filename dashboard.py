@@ -43,7 +43,7 @@ def get_redshift_connection():
             database=DB_NAME,
             user=DB_USER,
             password=DB_PASS,
-            port=int(DB_PORT)
+            port=int(DB_PORT),
             timeout=5 # Bağlantı kurmak için maksimum 5 saniye bekle
         )
         return conn
@@ -200,6 +200,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
