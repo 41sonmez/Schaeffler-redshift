@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import psycopg2 
+import pg8000.dbapi as psycopg2
 import altair as alt 
 from typing import Optional, Dict
 
@@ -196,4 +196,5 @@ def main():
     
 
 if __name__ == "__main__":
+
     main()
